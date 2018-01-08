@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+war {
+    archiveName = "ROOT.war"
+}
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:" + springBootVersion)
+        classpath("com.kenshoo:gradle-fpm:0.5")
+    }
+}
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-actuator:" + springBootVersion)
+    compile("org.springframework.boot:spring-boot-starter-web:" + springBootVersion)
+    compile("org.springframework.boot:spring-boot-starter-security:" + springBootVersion)
+
+    compile("de.codecentric:spring-boot-admin-server:1.5.1")
+    compile("de.codecentric:spring-boot-admin-server-ui-login:1.5.1")
+    compile("de.codecentric:spring-boot-admin-server-ui:1.5.1")
+    compile("de.codecentric:spring-boot-admin-server-ui-hystrix:1.5.1")
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+}
